@@ -1,0 +1,21 @@
+- hosts: localhost
+  tasks:
+    - name:  "Installing Dependencies"
+      block:
+       - name: Installing Python
+         package:
+          name: python3
+          state: present
+
+      rescue:
+       - name: Installing PIP
+         package:
+          name: python3-pip
+          state: latest
+
+      always:
+       - name: Upgrading PIP
+         pip:
+          name: pip
+          executable: pip3
+          state: latest

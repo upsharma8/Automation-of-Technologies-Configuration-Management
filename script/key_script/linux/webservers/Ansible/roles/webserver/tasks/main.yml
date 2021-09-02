@@ -1,0 +1,23 @@
+---
+# tasks file for webserver
+
+- name: "{{ ansible_facts['os_family'] }}"
+  include_vars: "{{ ansible_facts['os_family'] }}.yml"
+
+- name: Install apache webserver
+  package:
+    name: "{{ package }}"
+    state: present
+
+- name: Copy the html file
+  copy:
+     src: "aaa.html"
+     dest: "/var/www/html/web1.html"
+  notify:
+  - Restart
+
+- name: Start the service
+  service:
+     name: "{{ package }}"
+     state: started
+

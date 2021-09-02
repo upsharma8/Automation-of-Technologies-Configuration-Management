@@ -1,0 +1,11 @@
+- name: Install docker software
+  package:
+      name: docker.io
+      state: present
+      update_cache: yes
+
+- name: Start docker and kubelet
+  service:
+      name: docker
+      state: started
+      enabled: yes

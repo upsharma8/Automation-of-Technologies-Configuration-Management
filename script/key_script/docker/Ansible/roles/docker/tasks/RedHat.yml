@@ -1,0 +1,27 @@
+
+- name: "Install docker"
+  block:
+    - name: Force a failure
+      shell: /bin/false
+      when: ansible_facts['distribution'] != 'Amazon'
+
+    - name: "Docker Installation"
+      shell: "yum install docker -y"
+
+  rescue:
+    - name: "Configuring yum for docker software"
+      yum_repository:
+        file: "docker_repo"
+        baseurl: "https://download.docker.com/linux/centos/7/x86_64/stable/"
+        name: "docker"
+        gpgcheck: no
+        description: "docker repo"
+
+    - name: "Docker Installation"
+      command: "yum install docker-ce --nobest -y"
+
+- name: "Starting Docker service"
+  service:
+      name: "docker"
+      state: started
+      enabled: yes

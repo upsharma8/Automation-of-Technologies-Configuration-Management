@@ -1,0 +1,1 @@
+52.66.194.202 ansible_user=ec2-user ansible_ssh_private_key_file=/root/automation/script/upmanyu_key.pem

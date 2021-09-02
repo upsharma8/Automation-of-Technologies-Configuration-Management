@@ -1,0 +1,9 @@
+- name: Configured Kubernetes Master Node
+  hosts: tag_Name_K8S_Master
+  roles:
+    - role: rohitraut3366.kubernetes_master_node
+
+- name: Configured Kubernetes Slave Nodes
+  hosts: slave
+  roles:
+    - role: rohitraut3366.kubernetes_slave_node
